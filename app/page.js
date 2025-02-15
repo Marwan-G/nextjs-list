@@ -1,4 +1,6 @@
 "use client"
+import { useContext } from 'react'
+
 import React, { useState } from 'react'
 import {getImageUrl} from '@/app/utils'
        
@@ -7,7 +9,9 @@ import {places} from '@/app/data'
 const page = () => {
   return (
     <div className='flex container'>
-      <ListPlaces />
+      <Provider.imageSizeContext >
+        <ListPlaces />
+      </Provider.imageSizeContext>
     </div>
   )
 }
@@ -36,7 +40,7 @@ const ListPlaces = ()=>{
         <div className="flex h-28 bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700"> {/* Reduced height to h-48 */}
           {/* Image Container */}
           <div className="flex h-full w-1/5 min-w-[150px] shrink-0 rounded-l-lg"> {/* Narrower image column */}
-            <GetImage place={item} imageSize={isLarge} />
+            <GetImage place={item}  />
           </div>
           
           {/* Text Content */}
@@ -57,9 +61,9 @@ const ListPlaces = ()=>{
 }
 
 
-const GetImage =({place , imageSize })=>{      
+const GetImage =({place  })=>{      
 return(
-  <div className={`aspect-video ${imageSize ? 'w-full' : 'w-1/2'} overflow-hidden relative`}>
+  <div className={`aspect-video ${imageSizeContext ? 'w-full' : 'w-1/2'} overflow-hidden relative`}>
   <img 
     src={getImageUrl(place)}
     className="w-full h-full object-cover transition-all duration-300"
