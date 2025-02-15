@@ -1,0 +1,12 @@
+version: '3'
+services:
+  nextapp:
+    platform: linux/amd64    # Add this line
+    build: .
+    image: my-nextjs-app 
+    ports:
+      - "3001:3000"
+    volumes:
+      - .:/app
+    environment:
+      - BUN_ENV=development    # Bun specific
